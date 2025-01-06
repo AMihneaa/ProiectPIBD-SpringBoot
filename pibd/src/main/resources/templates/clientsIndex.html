@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clients List</title>
+    <link rel="stylesheet" type="text/css" href="/css/clientStyle.css">
+</head>
+<body>
+<h1>Clients List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Adress</th>
+        <th>Delete Client</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="clients : ${clientsIndex}">
+        <td th:text="${clients.getClientID()}"></td>
+        <td th:text="${clients.firstName}"></td>
+        <td th:text="${clients.getLastName()}"></td>
+        <td th:text="${clients.getEmail()}"></td>
+        <td th:text="${clients.getPhoneNumber()}"></td>
+        <td th:text="${clients.getAddress()}"></td>
+        <td>
+            <form th:action="@{/client/delete/{id}(id=${clients.getClientID()})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h1>Add New Client</h1>
+<form th:action="@{/client/create}" method="post">
+    <table>
+        <tr>
+            <td><label for="firstName">First Name:</label></td>
+            <td><input type="text" id="firstName" name="firstName" required></td>
+        </tr>
+        <tr>
+            <td><label for="lastName">Last Name:</label></td>
+            <td><input type="text" id="lastName" name="lastName" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" id="email" name="email" required></td>
+        </tr>
+        <tr>
+            <td><label for="phoneNumber">Phone Number:</label></td>
+            <td><input type="text" id="phoneNumber" name="phoneNumber" required></td>
+        </tr>
+        <tr>
+            <td><label for="address">Address:</label></td>
+            <td><input type="text" id="address" name="address" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Add Client</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

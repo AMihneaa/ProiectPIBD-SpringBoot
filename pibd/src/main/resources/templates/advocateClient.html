@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients List</title>
+    <link rel="stylesheet" type="text/css" href="/css/advocatesStyle.css">
+</head>
+<body>
+<h1 th:text="'Clients for Advocate: ' + ${advocateName}"></h1>
+<table>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Delete Client</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${advocateClient}">
+        <td th:text="${client.firstName}"></td>
+        <td th:text="${client.lastName}"></td>
+        <td th:text="${client.email}"></td>
+        <td th:text="${client.phoneNumber}"></td>
+        <td>
+            <form th:action="@{/advocates/{advocateID}/clients/delete(advocateID=${advocateID}, clientID=${client.getClientID()})}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>Add Client to Advocate</h1>
+<form th:action="@{/advocates/{advocateID}/clients/add(advocateID=${advocateID})}" method="post">
+    <label for="clientID">Client ID:</label>
+    <input type="number" id="clientID" name="clientID" required>
+    <button type="submit">Add Client</button>
+</form>
+
+
+</body>
+</html>

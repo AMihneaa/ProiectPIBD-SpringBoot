@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases List</title>
+    <link rel="stylesheet" type="text/css" href="/css/caseStyle.css">
+</head>
+<body>
+<h1>Cases List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Case ID</th>
+        <th>Advocate ID</th>
+        <th>Case Name</th>
+        <th>Case Type</th>
+        <th>Date Opened</th>
+        <th>Status</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="case : ${casesIndex}">
+        <td th:text="${case.getCaseID()}"></td>
+        <td th:text="${case.getAdvocateIDAsString()}"></td>
+        <td th:text="${case.getCaseName()}"></td>
+        <td th:text="${case.getCaseType()}"></td>
+        <td th:text="${case.getDateOpened()}"></td>
+        <td th:text="${case.getStatus()}"></td>
+        <td>
+            <form th:action="@{/cases/{id}(id=${case.getCaseID()})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Create New Case</h2>
+<form th:action="@{/cases}" method="post">
+    <label for="caseName">Case Name:</label>
+    <input type="text" id="caseName" name="caseName" required>
+    <label for="caseType">Case Type:</label>
+    <input type="text" id="caseType" name="caseType" required>
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Advocates List</title>
+    <link rel="stylesheet" type="text/css" href="/css/advocatesStyle.css">
+    <style>
+        table {
+            margin-bottom: 20px; /* Adjust the value as needed */
+        }
+    </style>
+</head>
+<body>
+<h1>Advocates List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Specialty</th>
+        <th>View Clients </th>
+        <th>View Cases</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="advocate : ${advocatesIndex}">
+        <td th:text="${advocate.getAdvocateID()}"></td>
+        <td th:text="${advocate.getFirstName()}"></td>
+        <td th:text="${advocate.getLastName()}"></td>
+        <td th:text="${advocate.getEmail()}"></td>
+        <td th:text="${advocate.getPhoneNumber()}"></td>
+        <td th:text="${advocate.getSpecialty()}"></td>
+        <td>
+            <a th:href="@{/advocates/{advocateID}/clients(advocateID=${advocate.getAdvocateID()})}"
+               style="text-decoration: none; padding: 4px 8px; background-color: #007bff; color: white; border-radius: 5px; font-size: 8px; display: inline-block; text-align: center;">
+                View Clients
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/advocates/{advocateID}/cases(advocateID=${advocate.getAdvocateID()})}"
+               style="text-decoration: none; padding: 4px 8px; background-color: #007bff; color: white; border-radius: 5px; font-size: 8px; display: inline-block; text-align: center;">
+                View Cases
+            </a>
+        </td>
+        <td>
+            <form th:action="@{/advocates/{id}(id=${advocate.getAdvocateID()})}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+<h1>Add New Advocate</h1>
+<form th:action="@{/advocates/create}" method="post">
+    <table>
+        <tr>
+            <td><label for="firstName">First Name:</label></td>
+            <td><input type="text" id="firstName" name="firstName" required></td>
+        </tr>
+        <tr>
+            <td><label for="lastName">Last Name:</label></td>
+            <td><input type="text" id="lastName" name="lastName" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" id="email" name="email" required></td>
+        </tr>
+        <tr>
+            <td><label for="phoneNumber">Phone Number:</label></td>
+            <td><input type="text" id="phoneNumber" name="phoneNumber" required></td>
+        </tr>
+        <tr>
+            <td><label for="specialty">Specialty:</label></td>
+            <td><input type="text" id="specialty" name="specialty" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Add Advocate</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

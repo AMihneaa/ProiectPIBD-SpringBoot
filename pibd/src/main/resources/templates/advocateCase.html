@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases List</title>
+    <link rel="stylesheet" type="text/css" href="/css/advocatesStyle.css">
+</head>
+<body>
+<h1 th:text="'Cases for Advocate: ' + ${advocateName}"></h1>
+<table>
+    <thead>
+    <tr>
+        <th>Case ID</th>
+        <th>Case Name</th>
+        <th>Case Type</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="case : ${advocateCases}">
+        <td th:text="${case.getCaseID()}"></td>
+        <td th:text="${case.getCaseName()}"></td>
+        <td th:text="${case.getCaseType()}"></td>
+        <td th:text="${case.getDateOpened()}"></td>
+        <td th:text="${case.getStatus()}"></td>
+        <td>
+            <form th:action="@{/advocates/{advocateID}/cases/remove(advocateID=${advocateID})}" method="post" hx-swap="outerHTML">
+                <input type="hidden" name="caseID" th:value="${case.caseID}">
+                <button type="submit">Remove</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>Add Case to Advocate</h1>
+<form th:action="@{/advocates/{advocateID}/cases/add(advocateID=${advocateID})}" method="post">
+    <label for="caseID">Case ID:</label>
+    <input type="number" id="caseID" name="caseID" required>
+    <button type="submit">Add Case</button>
+</form>
+</body>
+</html>
