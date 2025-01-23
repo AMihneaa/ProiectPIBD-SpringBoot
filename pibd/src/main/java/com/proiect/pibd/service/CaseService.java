@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CaseService {
@@ -23,6 +24,10 @@ public class CaseService {
 
     public void saveCase(Case newCase) {
         caseRepository.save(newCase);
+    }
+
+    public Case getCaseById(int caseID){
+        return caseRepository.findById(caseID).orElse(null);
     }
 
 }

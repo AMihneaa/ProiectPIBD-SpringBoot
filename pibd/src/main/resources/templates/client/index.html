@@ -15,6 +15,7 @@
         <th>Email</th>
         <th>Phone Number</th>
         <th>Adress</th>
+        <th>Edit</th>
         <th>Delete Client</th>
     </tr>
     </thead>
@@ -27,7 +28,12 @@
         <td th:text="${clients.getPhoneNumber()}"></td>
         <td th:text="${clients.getAddress()}"></td>
         <td>
-            <form th:action="@{/client/delete/{id}(id=${clients.getClientID()})}" method="post">
+            <a th:href="@{/client/{clientID}/update(clientID=${clients.getClientID()})}">
+                Update
+            </a>
+        </td>
+        <td>
+            <form th:action="@{/client/delete/{id}(id=${clients.getClientID()})}" method="post"  style="margin-left: 10px; margin-right:10px;">
                 <button type="submit">Delete</button>
             </form>
         </td>

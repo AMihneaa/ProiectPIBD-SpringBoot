@@ -1,0 +1,30 @@
+<h1>Update Course</h1>
+<link rel="stylesheet" href="/css/advocatesStyle.css">
+<form th:action="@{/advocates/{advocateID}/save(advocateID=${advocateID})}" method="post">
+    <input type="hidden" id="advocateID" name="advocateID" value="{advocateID}">
+    <table>
+        <tr>
+            <td><label for="first_name">First Name</label></td>
+            <td><input th:value="${first_name}" type="text" id="first_name" name="first_name" required></td>
+        </tr>
+        <tr>
+            <td><label for="last_name">Last Name:</label></td>
+            <td><input type="text" id="last_name" name="last_name" th:value="${last_name}" required></td>
+        </tr>
+        <tr>
+            <td><label for="specialty">Specialty:</label></td>
+            <td><input type="text" id="specialty" name="specialty" th:value="${specialty}" required></td>
+        </tr>
+        <tr>
+            <td><label for="phone_number">Phone Number:</label></td>
+            <td><input type="text" id="phone_number" name="phone_number" th:value="${phone_number}" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="text" id="email" name="email" th:value="${email}" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Update Advocate</button></td>
+        </tr>
+    </table>
+</form>

@@ -27,7 +27,7 @@
         <td th:text="${case.getDateOpened()}"></td>
         <td th:text="${case.getStatus()}"></td>
         <td>
-            <form th:action="@{/advocates/{advocateID}/cases/remove(advocateID=${advocateID})}" method="post" hx-swap="outerHTML">
+            <form th:action="@{/advocates/{advocateID}/cases/remove(advocateID=${advocateID})}" method="post" hx-swap="outerHTML"  style="margin-left: 10px; margin-right:10px;">
                 <input type="hidden" name="caseID" th:value="${case.caseID}">
                 <button type="submit">Remove</button>
             </form>
@@ -37,7 +37,7 @@
 </table>
 
 <h1>Add Case to Advocate</h1>
-<form th:action="@{/advocates/{advocateID}/cases/add(advocateID=${advocateID})}" method="post">
+<form th:action="@{/advocates/{advocateID}/cases/add(advocateID=${advocateID})}" method="post"  style="margin-left: 10px; margin-right:10px;">
     <label for="caseID">Case ID:</label>
     <input type="number" id="caseID" name="caseID" required>
     <button type="submit">Add Case</button>

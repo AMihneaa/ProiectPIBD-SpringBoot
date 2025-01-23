@@ -1,0 +1,22 @@
+<h1>Update Course</h1>
+<link rel="stylesheet" href="/css/advocatesStyle.css">
+<form th:action="@{/cases/{caseID}/save(caseID=${caseID})}" method="post">
+    <input type="hidden" id="caseID" name="caseID" value="{caseID}">
+    <table>
+        <tr>
+            <td><label for="case_name">last_name:</label></td>
+            <td><input type="text" id="case_name" name="case_name" th:value="${case_name}" required></td>
+        </tr>
+        <tr>
+            <td><label for="case_type">specialty:</label></td>
+            <td><input type="text" id="case_type" name="case_type" th:value="${case_type}" required></td>
+        </tr>
+        <tr>
+            <td><label for="status">Difficulty:</label></td>
+            <td><input type="text" id="status" name="status" th:value="${status}" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Update Case</button></td>
+        </tr>
+    </table>
+</form>

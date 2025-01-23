@@ -29,9 +29,11 @@ public class ClientService {
     }
 
     public void deleteClientById(int id) {
-        // Delete related data from AdvocateClient
         advocateClientRepository.deleteByClientId(id);
-        // Delete the client
         clientRepository.deleteById(id);
+    }
+
+    public Client getClientById(int clientID){
+        return clientRepository.findById(clientID).orElse(null);
     }
 }

@@ -65,8 +65,9 @@ form input[type="email"] {
 
 /* Add styles for buttons inside the table */
 table td button {
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
+    margin: 5px;
     font-size: 12px;
     background-color: cadetblue;
     color: white;

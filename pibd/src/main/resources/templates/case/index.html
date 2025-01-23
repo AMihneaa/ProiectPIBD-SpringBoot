@@ -17,6 +17,7 @@
         <th>Case Type</th>
         <th>Date Opened</th>
         <th>Status</th>
+        <th>Edit</th>
         <th>Delete</th>
     </tr>
     </thead>
@@ -29,7 +30,12 @@
         <td th:text="${case.getDateOpened()}"></td>
         <td th:text="${case.getStatus()}"></td>
         <td>
-            <form th:action="@{/cases/{id}(id=${case.getCaseID()})}" method="post">
+            <a th:href="@{/cases/{caseID}/update(caseID=${case.getCaseID()})}">
+                Update
+            </a>
+        </td>
+        <td>
+            <form th:action="@{/cases/{id}(id=${case.getCaseID()})}" method="post"  style="margin-left: 10px; margin-right:10px;">
                 <button type="submit">Delete</button>
             </form>
         </td>

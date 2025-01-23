@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/advocatesStyle.css">
     <style>
         table {
-            margin-bottom: 20px; /* Adjust the value as needed */
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -20,6 +20,7 @@
         <th>Email</th>
         <th>Phone Number</th>
         <th>Specialty</th>
+        <th>Update</th>
         <th>View Clients </th>
         <th>View Cases</th>
         <th>Delete</th>
@@ -34,6 +35,11 @@
         <td th:text="${advocate.getPhoneNumber()}"></td>
         <td th:text="${advocate.getSpecialty()}"></td>
         <td>
+            <a th:href="@{/advocates/{advocateID}/update(advocateID=${advocate.getAdvocateID()})}">
+                Edit Advocate
+            </a>
+        </td>
+        <td>
             <a th:href="@{/advocates/{advocateID}/clients(advocateID=${advocate.getAdvocateID()})}"
                style="text-decoration: none; padding: 4px 8px; background-color: #007bff; color: white; border-radius: 5px; font-size: 8px; display: inline-block; text-align: center;">
                 View Clients
@@ -46,9 +52,9 @@
             </a>
         </td>
         <td>
-            <form th:action="@{/advocates/{id}(id=${advocate.getAdvocateID()})}" method="post">
+            <form th:action="@{/advocates/{id}(id=${advocate.getAdvocateID()})}" method="post" style="margin-left: 10px; margin-right:10px;">
                 <input type="hidden" name="_method" value="delete"/>
-                <button type="submit">Delete</button>
+                <button type="submit">delete</button>
             </form>
         </td>
     </tr>

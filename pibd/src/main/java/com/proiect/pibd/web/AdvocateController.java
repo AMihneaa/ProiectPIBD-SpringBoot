@@ -22,7 +22,7 @@ public class AdvocateController {
     public String index(Model model) {
         List<Advocate> advocates = advocateService.getAllAdvocates();
         model.addAttribute("advocatesIndex", advocates);
-        return "advocatesIndex";
+        return "/advocate/index";
     }
 
     @GetMapping("/{advocateID}/clients")
@@ -32,7 +32,7 @@ public class AdvocateController {
         model.addAttribute("advocateClient", clients);
         model.addAttribute("advocateName", advocate.getFirstName() + " " + advocate.getLastName());
         model.addAttribute("advocateID", advocate.getAdvocateID());
-        return "advocateClient";
+        return "/advocate/client";
     }
 
     @GetMapping("/{id}")
@@ -62,7 +62,7 @@ public class AdvocateController {
         Advocate advocate = advocateService.getAdvocateByID(advocateID);
         model.addAttribute("advocateCases", cases);
         model.addAttribute("advocateName", advocate.getFirstName() + " " + advocate.getLastName());
-        return "advocateCase";
+        return "/advocate/case";
     }
 
     @PostMapping("/{advocateID}/clients/add")
@@ -87,5 +87,38 @@ public class AdvocateController {
     public String addCaseToAdvocate(@PathVariable int advocateID, @RequestParam int caseID) {
         advocateService.addCaseToAdvocate(advocateID, caseID);
         return "redirect:/advocates/" + advocateID + "/cases";
+    }
+
+    @GetMapping("/{advocateID}/update")
+    public String updateAdvocate(@PathVariable int advocateID, Model model){
+
+        Advocate advocate = advocateService.getAdvocateByID(advocateID);
+        model.addAttribute("first_name", advocate.getFirstName());
+        model.addAttribute("last_name", advocate.getLastName());
+        model.addAttribute("specialty", advocate.getSpecialty());
+        model.addAttribute("phone_number", advocate.getPhoneNumber());
+        model.addAttribute("email", advocate.getEmail());
+
+        return "/advocate/update";
+    }
+
+    @PostMapping("/{advocateID}/save")
+    public String updateAdvocateByID(@PathVariable int advocateID,
+                                   @RequestParam String first_name,
+                                   @RequestParam String last_name,
+                                   @RequestParam String specialty,
+                                   @RequestParam String phone_number,
+                                   @RequestParam String email){
+        Advocate advocate = advocateService.getAdvocateByID(advocateID);
+
+        advocate.setFirstName(first_name);
+        advocate.setLastName(last_name);
+        advocate.setSpecialty(specialty);
+        advocate.setEmail(email);
+        advocate.setPhoneNumber(phone_number);
+
+
+        advocateService.saveAdvocate(advocate);
+        return "redirect:/advocates";
     }
 }
